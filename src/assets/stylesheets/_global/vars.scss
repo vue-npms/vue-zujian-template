@@ -1,0 +1,36 @@
+//////////////////////////////////////////////////////////////////
+// px or rem config
+// 【 $_uiUseRem & $_uiRemDesignSketchWidth 】已经移植到 src/assets/javascripts/_share_scss_vars.js
+//$_uiUseRem: false !default;
+// rem模式 该值应该和rem.js函数传递的值保持一致, 值参考拿到效果图的宽度
+//$_uiRemDesignSketchWidth: 375 !default;
+@function pxRem($px) {
+  @if $_uiUseRem {
+    // 这里的375是默认值，因为框架就是按375设计的，不需要更改
+    @return $px * $_uiRemDesignSketchWidth / 375 + rem;
+  } @else {
+    @return $px + px;
+  }
+}
+
+//////////////////////////////////////////////////////////////////
+// color config
+$color-page-bg: #f5f5f5 !default;
+$color-page-main: #fff !default;
+
+$color-text-default: #484746 !default;
+$color-text-title: #444 !default;
+$color-text-desc: #999 !default;
+
+$color-border-default: #ddd !default;
+
+$color-primary: #26a2ff !default;
+$color-danger: #ef4f4f !default;
+$color-warning: #ffb400 !default;
+$color-white: #fff !default;
+$color-stable: #f5f5f5 !default;
+$color-disable: #ccc !default;
+$color-dark: #484746 !default;
+$color-hollow: rgba(0, 0, 0, 0) !default; // 镂空
+$color-default: #f6f8fa !default;
+

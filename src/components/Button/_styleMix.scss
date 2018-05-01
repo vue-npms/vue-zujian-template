@@ -1,0 +1,73 @@
+@mixin ui-button {
+  ._ui-button {
+    display: inline-block;
+    text-align: center;
+    border: none;
+    padding: 0 pxRem(14);
+    border-radius: 3px;
+    box-shadow: 0 0 1px $color-border-default;
+    font-weight: bolder;
+    cursor: pointer;
+
+    @include animation-rotate;
+    // size
+    &.large {
+      line-height: pxRem(50);
+      font-size: pxRem(18);
+    }
+    &.normal {
+      line-height: pxRem(38);
+      font-size: pxRem(16);
+    }
+    &.small {
+      line-height: pxRem(29);
+      font-size: pxRem(14);
+    }
+    &.mini {
+      line-height: pxRem(24);
+      font-size: pxRem(13);
+    }
+    // primary
+    &.default {
+      background: $color-page-bg;
+      color: $color-text-default;
+    }
+    &.danger {
+      background: $color-danger;
+      color: #fff;
+    }
+    &.primary {
+      background: $color-primary;
+      color: #fff;
+    }
+    &.warning {
+      background: $color-warning;
+      color: #fff;
+    }
+    &.hollow {
+      background: $color-hollow;
+      color: $color-text-default;
+    }
+    &.plain {
+      box-shadow: none;
+      background: $color-hollow;
+      color: $color-text-default;
+    }
+    &.is-disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      &:active {
+        opacity: .55;
+      }
+    }
+    &:active {
+      opacity: 0.7;
+    }
+
+    i[class*="loading"] {
+      display: inline-block;
+      font-size: pxRem(14);
+      animation: animation-rotate 1.2s linear infinite;
+    }
+  }
+}
