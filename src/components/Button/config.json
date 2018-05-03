@@ -1,6 +1,6 @@
 {
   "entry": {
-    "button": "button.vue"
+    "button": "Button.vue"
   },
   "units": ["px", "rem"]
 }

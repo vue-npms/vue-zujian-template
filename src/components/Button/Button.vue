@@ -11,6 +11,9 @@ export default {
   props: {
     type: {
       type: String,
+      validator (value) {
+        return ['default', 'danger', 'primary', 'warning', 'hollow', 'plain'].indexOf(value) > -1
+      },
       default: 'default'
     },
     size: {
