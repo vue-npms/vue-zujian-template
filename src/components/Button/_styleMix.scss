@@ -64,7 +64,7 @@
       opacity: 0.7;
     }
 
-    i[class*="loading"] {
+    i.loading {
       display: inline-block;
       font-size: pxRem(14);
       animation: animation-rotate 1.2s linear infinite;

@@ -1,6 +1,6 @@
 <template>
   <span class="_ui-button" :class="calcButtonClass" @click="handleClick">
-    <i class="iconfont" :class="{[this.icon]: this.icon, [this.loadingIcon]: this.loading}"></i>
+    <i class="iconfont" :class="{[icon]: icon, [loadingIcon]: loading, loading}"></i>
     <slot></slot>
   </span>
 </template>
