@@ -1,0 +1,7 @@
+{
+  "entry": {
+    "CheckboxGroup": "CheckboxGroup.vue",
+    "Checkbox": "Checkbox.vue"
+  },
+  "units": ["px", "rem"]
+}
