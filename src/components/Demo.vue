@@ -17,7 +17,7 @@
       <ui-button type="hollow" disabled @click="hi(9)">hollow</ui-button>
     </div>
     <div style="margin-top: 20px">
-      <ui-button disabled loading icon="icon-loading">default</ui-button>
+      <ui-button loading icon="icon-loading">default</ui-button>
     </div>
     <div style="margin-top: 20px">
       <ui-button size="large" style="display: block; margin-bottom: 20px">default(默认)</ui-button>

@@ -35,7 +35,7 @@ export default {
     calcButtonClass () {
       return {
         [this.type]: true,
-        'is-disabled': this.disabled,
+        'is-disabled': this.disabled || this.loading,
         [this.size]: true
       }
     }
