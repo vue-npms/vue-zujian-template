@@ -24,9 +24,8 @@ export default {
         return this.value
       },
       set (nv) {
-        this.$children.filter(item => item.$options.name === 'UiCheckbox').forEach((child) => {
-          child.checked = this.value.indexOf(child.val) !== -1
-        })
+        this.$emit('input', nv)
+        this.updateChildren()
       }
     }
   },
@@ -42,14 +41,23 @@ export default {
   },
   methods: {
     change (val) {
-      let index = this.value.indexOf(val)
+      let tmpValues = this.value
+      let index = tmpValues.indexOf(val)
       if (index === -1) {
-        this.value.push(val)
+        tmpValues.push(val)
       } else {
-        this.value.splice(index, 1)
+        tmpValues.splice(index, 1)
       }
-      this.currentValue = this.value
+      this.currentValue = tmpValues
+    },
+    updateChildren () {
+      this.$children.filter(item => item.$options.name === 'UiCheckbox').forEach((child) => {
+        child.checked = this.value.indexOf(child.val) !== -1
+      })
     }
+  },
+  updated () {
+    this.updateChildren()
   },
   components: {
     'UiCheckbox': CheckBox
