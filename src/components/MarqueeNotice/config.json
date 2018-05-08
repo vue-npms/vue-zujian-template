@@ -1,0 +1,6 @@
+{
+  "entry": {
+    "marqueeNotice": "MarqueeNotice.vue"
+  },
+  "units": ["px", "rem"]
+}
