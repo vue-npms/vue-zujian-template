@@ -1,0 +1,6 @@
+{
+  "entry": {
+    "rollNotice": "RollNotice.vue"
+  },
+  "units": ["px", "rem"]
+}

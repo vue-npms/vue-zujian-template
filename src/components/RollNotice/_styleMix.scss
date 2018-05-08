@@ -1,0 +1,10 @@
+@mixin ui-roll-notice {
+  ._ui-roll-notice {
+    overflow: hidden;
+    .roll-notice-item {
+      display: flex;
+      height: 100%;
+      align-items: center;
+    }
+  }
+}
