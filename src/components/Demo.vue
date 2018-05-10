@@ -1,51 +1,65 @@
 <template>
   <div style="padding-top: 20px">
-    <div>
-      <ui-button @click="hi(0)">default</ui-button>
-      <ui-button type="plain" @click="hi(0.5)">plain</ui-button>
-      <ui-button type="danger" @click="hi(1)">danger</ui-button>
-      <ui-button type="primary" @click="hi(2)">primary</ui-button>
-      <ui-button type="warning" @click="hi(3)">warning</ui-button>
-      <ui-button type="hollow" @click="hi(4)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button disabled @click="hi(5)">default</ui-button>
-      <ui-button type="plain" disabled @click="hi(5.5)">plain</ui-button>
-      <ui-button type="danger" disabled @click="hi(6)">danger</ui-button>
-      <ui-button type="primary" disabled @click="hi(7)">primary</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">warning</ui-button>
-      <ui-button type="hollow" disabled @click="hi(9)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button loading icon="icon-loading">default</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button size="large" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="small" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="mini" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-    </div>
-
-    <div style="margin-top: 20px">
-      <ui-button @click="hi(0)" size="large">large</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">normal</ui-button>
-      <ui-button type="danger" size="small" @click="hi(1)">small</ui-button>
-      <ui-button type="primary" size="mini" @click="hi(2)">mini</ui-button>
-    </div>
+    <button @click="usage1">Base usage1</button>
+    <br/>
+    <button @click="usage2">Multi request use one Toast</button>
+    <br/>
+    <button @click="usage3">Toast with promise</button>
   </div>
 </template>
 
 <script>
-// or global lazy load
-import Button from '@/components/Button/Button.vue'
+import Vue from 'vue'
+import ToastBox from '@/components/Dialog/Toast/index.js'
+Vue.use(ToastBox)
 export default {
   methods: {
-    hi (num) {
-      console.log('hi', num)
+    usage1 () {
+      let loading1 = ToastBox.new({icon: 'icon-loading', callback: () => { console.log('closed') }})
+      setTimeout(function () {
+        loading1.close()
+      }, 3000)
+    },
+    // new 几个相同的identify，就需要调用多少次 close 方法
+    usage2 () {
+      ToastBox.new({icon: 'icon-loading', message: '很快就好了', callback: () => { console.log('closed') }, identify: '1'})
+      ToastBox.new({identify: '1'})
+      ToastBox.new({identify: '1'})
+      ToastBox.new({identify: '1'})
+      ToastBox.new({identify: '1'})
+      function setTime () {
+        setTimeout(() => {
+          let identify1Loading = ToastBox.getWithIdentify('1')
+          // 强制关闭所有
+          // Loading.getWithIdentify('1').forceClose()
+          if (identify1Loading) {
+            console.log('before close: ', identify1Loading.$extraCounter)
+            identify1Loading.close()
+            console.log('after close: ', identify1Loading.$extraCounter)
+            setTime()
+          }
+        }, 1000)
+      }
+      setTime()
+    },
+    usage3 () {
+      function createPromise () {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let random = Math.random()
+            if (random > 0.5) {
+              resolve('哈哈，赢了')
+            }
+            reject(new Error('呜呜~，输了'))
+          }, 3000)
+        })
+      }
+      ToastBox.newWithPromise(createPromise(), {message: '华山论剑'}).then(result => {
+        console.log(result)
+      }).catch(err => {
+        console.log('err--:', err)
+      })
     }
-  },
-  components: {
-    'UiButton': Button
   }
 }
 </script>

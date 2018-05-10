@@ -1,0 +1,37 @@
+@mixin ui-dialog-toast-box {
+  ._ui-dialog {
+    @include dialog-mask;
+    @include animation-zoom-in;
+    @include animation-rotate;
+    background-color: transparent;
+    .toast-box {
+      display: flex;
+      align-items: center;
+      max-width: 80%;
+      padding: pxRem(15);
+      background: rgba(40,40,40,.8);
+      text-align: center;
+      color: #fff;
+      border-radius: pxRem(3);
+      animation: animation-zoom-in .12s ease-in forwards;
+
+      .icon {
+        display: inline-block;
+        font-size: pxRem(24);
+        margin-top: pxRem(-2);
+
+        &[class*="loading"] {
+          animation: animation-rotate 1.2s linear infinite;
+        }
+      }
+
+      .text {
+        display: inline-block;
+        font-size: pxRem(16);
+        line-height: pxRem(20);
+        word-break: break-all;
+        padding: 0 pxRem(3);
+      }
+    }
+  }
+}
