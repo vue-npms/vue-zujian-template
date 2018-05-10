@@ -1,0 +1,61 @@
+@mixin ui-dialog-action-sheet {
+  ._ui-dialog {
+    @include dialog-mask;
+    flex-direction: column;
+    justify-content: flex-end;
+    .action-sheet {
+      @include animation-fade-out;
+      @include animation-slide-in-up;
+      @include animation-slide-out-down;
+      width: 100%;
+      .mask {
+        position: fixed;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background: #ccc;
+        opacity: 0.2;
+      }
+      .action-sheet-items {
+        background: #EFEFF4;
+        text-align: center;
+        animation: animation-slide-in-up .2s ease forwards;
+
+        .action-sheet-item {
+          font-size: pxRem(14);
+          line-height: pxRem(49);
+          background: #fff;
+          color: $color-dark;
+          @include tap;
+
+          border-bottom: pxRem(1) solid $color-border-default;
+
+          &.cancel {
+            &:before {
+              content: '';
+              display: block;
+              height: pxRem(3);
+              background: #f2f2f2;
+            }
+          }
+        }
+      }
+      color-primary {
+        color: $color-primary;
+      }
+      .color-danger {
+        color: $color-danger;
+      }
+      .color-disabled {
+        @include disabled;
+        pointer-events: none;
+      }
+    }
+    &.leave {
+      .mask {
+        animation: animation-fade-out .2s linear forwards;
+      }
+      .action-sheet {
+        animation: animation-slide-out-down .2s linear forwards;
+      }
+    }
+  }
+}

@@ -1,51 +1,45 @@
 <template>
   <div style="padding-top: 20px">
-    <div>
-      <ui-button @click="hi(0)">default</ui-button>
-      <ui-button type="plain" @click="hi(0.5)">plain</ui-button>
-      <ui-button type="danger" @click="hi(1)">danger</ui-button>
-      <ui-button type="primary" @click="hi(2)">primary</ui-button>
-      <ui-button type="warning" @click="hi(3)">warning</ui-button>
-      <ui-button type="hollow" @click="hi(4)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button disabled @click="hi(5)">default</ui-button>
-      <ui-button type="plain" disabled @click="hi(5.5)">plain</ui-button>
-      <ui-button type="danger" disabled @click="hi(6)">danger</ui-button>
-      <ui-button type="primary" disabled @click="hi(7)">primary</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">warning</ui-button>
-      <ui-button type="hollow" disabled @click="hi(9)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button loading icon="icon-loading">default</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button size="large" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="small" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="mini" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-    </div>
-
-    <div style="margin-top: 20px">
-      <ui-button @click="hi(0)" size="large">large</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">normal</ui-button>
-      <ui-button type="danger" size="small" @click="hi(1)">small</ui-button>
-      <ui-button type="primary" size="mini" @click="hi(2)">mini</ui-button>
-    </div>
+    <button @click="showActionSheet">show action sheet</button>
   </div>
 </template>
 
 <script>
-// or global lazy load
-import Button from '@/components/Button/Button.vue'
+import Vue from 'vue'
+import ActionSheet from '@/components/Dialog/ActionSheet'
+Vue.use(ActionSheet)
 export default {
   methods: {
-    hi (num) {
-      console.log('hi', num)
+    showActionSheet () {
+      ActionSheet.new({
+        items: [{
+          text: 'Action One',
+          color: '#f00',
+          click: () => { console.log(1) }
+        }, {
+          text: 'Action Two',
+          color: true,
+          disabled: true,
+          click: () => { console.log(2) }
+        }, {
+          text: 'Action Three',
+          click: () => { console.log(3) }
+        }, {
+          text: 'Action Four',
+          hidden: true
+        }],
+        cancel: {
+          text: '默认取消',
+          // 隐藏取消按钮
+          // hidden: true,
+          click: () => { console.log('取消啦') }
+        },
+        callback: (item) => { console.log('关闭回调', item) }
+      })
     }
   },
   components: {
-    'UiButton': Button
+    'UiActionSheet': ActionSheet
   }
 }
 </script>
