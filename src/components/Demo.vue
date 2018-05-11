@@ -1,43 +1,56 @@
 <template>
   <div style="padding-top: 20px">
-    <div>
-      <ui-button @click="hi(0)">default</ui-button>
-      <ui-button type="plain" @click="hi(0.5)">plain</ui-button>
-      <ui-button type="danger" @click="hi(1)">danger</ui-button>
-      <ui-button type="primary" @click="hi(2)">primary</ui-button>
-      <ui-button type="warning" @click="hi(3)">warning</ui-button>
-      <ui-button type="hollow" @click="hi(4)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button disabled @click="hi(5)">default</ui-button>
-      <ui-button type="plain" disabled @click="hi(5.5)">plain</ui-button>
-      <ui-button type="danger" disabled @click="hi(6)">danger</ui-button>
-      <ui-button type="primary" disabled @click="hi(7)">primary</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">warning</ui-button>
-      <ui-button type="hollow" disabled @click="hi(9)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button loading icon="icon-loading">default</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button size="large" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="small" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="mini" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-    </div>
+    <div @click="$refs['fromLeft'].showPop = true">togglePageFromLeftWithModal [mask][modal][modal-lock]</div>
+    <ui-popup from="left" modal modal-lock mask style="background: #f00" ref="fromLeft">
+      <div @click="$refs['fromLeft'].close()">--- closePage ---</div>
+    </ui-popup>
+    <!--<ui-popup v-model="isShowFromLeft" from="left" modal modal-lock>-->
+    <!--<div @click="isShowFromLeft = false">closePage</div>-->
+    <!--</ui-popup>-->
 
-    <div style="margin-top: 20px">
-      <ui-button @click="hi(0)" size="large">large</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">normal</ui-button>
-      <ui-button type="danger" size="small" @click="hi(1)">small</ui-button>
-      <ui-button type="primary" size="mini" @click="hi(2)">mini</ui-button>
-    </div>
+    <div @click="$refs['fromRight'].showPop = true">togglePageFromRight [modal]</div>
+    <ui-popup from="right" modal style="background: #0f0" ref="fromRight">
+      <div @click="$refs['fromRight'].close()">--- closePage ---</div>
+    </ui-popup>
+
+    <div @click="$refs['fromLeftFullPage'].showPop = true">isShowFromLeftWithFullPage</div>
+    <ui-popup from="left" page style="background: #00f" ref="fromLeftFullPage">
+      <div @click="$refs['fromLeftFullPage'].close()">--- closePage ---</div>
+    </ui-popup>
+
+    <div @click="$refs['fromRightFullPage'].showPop = true">togglePageFromRightWithPage</div>
+    <ui-popup from="right" page style="background: #0ff" ref="fromRightFullPage">
+      <div @click="$refs['fromRightFullPage'].close()">--- closePage ---</div>
+    </ui-popup>
+
+    <hr>
+
+    <div @click="$refs['fromTop'].showPop = true">togglePageFromTopWithModal[no mask]</div>
+    <!--can set min-height   margin-top 等等，灵活使用，比如有header60高度，可这是margin-top: 60px-->
+    <ui-popup from="top" modal style="background: #f00; min-height: 100px" ref="fromTop">
+      <div @click="$refs['fromTop'].close()">--- closePage ---</div>
+    </ui-popup>
+
+    <div @click="$refs['fromBottom'].showPop = true">togglePageFromBottom</div>
+    <ui-popup from="bottom" style="background: #0f0" ref="fromBottom">
+      <div @click="$refs['fromBottom'].close()">--- closePage ---</div>
+    </ui-popup>
+
+    <div @click="$refs['fromTopFullPage'].showPop = true">isShowFromTopWithPage</div>
+    <ui-popup from="top" page style="background: #00f" ref="fromTopFullPage">
+      <div @click="$refs['fromTopFullPage'].close()">--- closePage ---</div>
+    </ui-popup>
+
+    <div @click="$refs['fromBottomFullPage'].showPop = true">togglePageFromBottomWithPage</div>
+    <ui-popup from="bottom" page style="background: #0ff" ref="fromBottomFullPage">
+      <div @click="$refs['fromBottomFullPage'].close()">--- closePage ---</div>
+    </ui-popup>
   </div>
 </template>
 
 <script>
 // or global lazy load
-import Button from '@/components/Button/Button.vue'
+import Popup from '@/components/UiPopup/Popup.vue'
 export default {
   methods: {
     hi (num) {
@@ -45,7 +58,7 @@ export default {
     }
   },
   components: {
-    'UiButton': Button
+    'UiPopup': Popup
   }
 }
 </script>

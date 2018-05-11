@@ -1,0 +1,77 @@
+@mixin ui-popup {
+  ._ui-popup {
+    position: fixed;
+    background: #fff;
+    top: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+    transition: all .2s ease-out;
+
+    .page-popup-mask {
+      position: fixed;
+      left: 0; top: 0; right: 0; bottom: 0;
+      opacity: 0.1;
+
+      &.mask {
+        background: rgba(180, 180, 180, 0.2);
+        opacity: 1;
+      }
+    }
+
+    &.left {
+      left: 0;
+      right: auto;
+      &.page {
+        right: 0;
+      }
+      &._ui-popup-transition-enter, &._ui-popup-transition-leave-active {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+      }
+    }
+
+    &.right {
+      left: auto;
+      right: 0;
+      &.page {
+        left: 0;
+      }
+      &._ui-popup-transition-enter, &._ui-popup-transition-leave-active {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+      }
+    }
+
+    &.top, &.bottom {
+      left: 0;
+      right: 0;
+    }
+    &.top {
+      top: 0;
+      bottom: auto;
+      &.page {
+        bottom: 0;
+      }
+      &._ui-popup-transition-enter, &._ui-popup-transition-leave-active {
+        transform: translate3d(0, -100%, 0);
+        opacity: 0;
+      }
+    }
+
+    &.bottom {
+      top: auto;
+      bottom: 0;
+      &.page {
+        top: 0;
+      }
+      &._ui-popup-transition-enter, &._ui-popup-transition-leave-active {
+        transform: translate3d(0, 100%, 0);
+        opacity: 0;
+      }
+    }
+
+    .slot-wrap {
+      position: relative;
+    }
+  }
+}
