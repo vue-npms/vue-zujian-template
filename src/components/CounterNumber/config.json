@@ -1,0 +1,6 @@
+{
+  "entry": {
+    "counterNumber": "CounterNumber.vue"
+  },
+  "units": ["px", "rem"]
+}

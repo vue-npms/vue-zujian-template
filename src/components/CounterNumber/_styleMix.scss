@@ -1,0 +1,21 @@
+@mixin ui-counter-number {
+  ._ui-counter-number {
+    overflow: hidden;
+
+    .roll-notice-item {
+      height: 100%;
+    }
+  }
+}
+
+@mixin ui-counter-number-item {
+  ._ui-counter-number-item {
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    .wrap {
+      animation-timing-function: ease-in-out;
+    }
+  }
+}

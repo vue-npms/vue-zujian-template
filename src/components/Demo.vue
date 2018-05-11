@@ -1,51 +1,44 @@
 <template>
   <div style="padding-top: 20px">
-    <div>
-      <ui-button @click="hi(0)">default</ui-button>
-      <ui-button type="plain" @click="hi(0.5)">plain</ui-button>
-      <ui-button type="danger" @click="hi(1)">danger</ui-button>
-      <ui-button type="primary" @click="hi(2)">primary</ui-button>
-      <ui-button type="warning" @click="hi(3)">warning</ui-button>
-      <ui-button type="hollow" @click="hi(4)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button disabled @click="hi(5)">default</ui-button>
-      <ui-button type="plain" disabled @click="hi(5.5)">plain</ui-button>
-      <ui-button type="danger" disabled @click="hi(6)">danger</ui-button>
-      <ui-button type="primary" disabled @click="hi(7)">primary</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">warning</ui-button>
-      <ui-button type="hollow" disabled @click="hi(9)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button loading icon="icon-loading">default</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button size="large" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="small" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="mini" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-    </div>
-
-    <div style="margin-top: 20px">
-      <ui-button @click="hi(0)" size="large">large</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">normal</ui-button>
-      <ui-button type="danger" size="small" @click="hi(1)">small</ui-button>
-      <ui-button type="primary" size="mini" @click="hi(2)">mini</ui-button>
-    </div>
+    <h3>default</h3>
+    <ui-counter-number :number="number1"></ui-counter-number>
+    <h3>:fix-count="5"</h3>
+    <ui-counter-number :number="number1" :fix-count="5"></ui-counter-number>
+    <h3>:fix-count="10" :speed="1000" :delay-each="100"</h3>
+    <ui-counter-number :number="number2" :fix-count="10" :speed="1000" :delay-each="100"></ui-counter-number>
+    <h3>:fix-count="10" fix-str="-" :speed="1000" :delay-each="100"</h3>
+    <ui-counter-number :number="number2" :fix-count="10" fix-str="-" :speed="1000" :delay-each="100"></ui-counter-number>
+    <h3>height="50px" & custom view</h3>
+    <ui-counter-number :number="number1" height="50px">
+      <template slot-scope="{number}">
+        <span style="display: inline-block; background: #999; width: 50px; height: 50px; line-height: 50px; color: #f00; font-size: 30px">{{number}}</span>
+      </template>
+    </ui-counter-number>
   </div>
 </template>
 
 <script>
 // or global lazy load
-import Button from '@/components/Button/Button.vue'
+import CounterNumber from '@/components/CounterNumber/CounterNumber.vue'
 export default {
-  methods: {
-    hi (num) {
-      console.log('hi', num)
+  data () {
+    return {
+      number1: 30,
+      number2: 888
     }
   },
+  mounted () {
+    setInterval(() => {
+      let val = -1 // parseInt(Math.random() + 0.5) * 2 - 1
+      this.number1 += val
+    }, 1000)
+
+    setInterval(() => {
+      this.number2 += parseInt(Math.random() * 500 - 250)
+    }, 3000)
+  },
   components: {
-    'UiButton': Button
+    'UiCounterNumber': CounterNumber
   }
 }
 </script>

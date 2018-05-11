@@ -1,0 +1,125 @@
+<template>
+  <div class="_ui-counter-number-item">
+    <div :style="{height: height, lineHeight: height}" v-if="!isNumber">
+      <slot :number="number"></slot>
+    </div>
+    <div class="wrap" :style="styles" ref="transRef">
+      <div :style="{height: height, lineHeight: height}" v-for="(fill,index) in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="index">
+        <slot :number="fill"></slot>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'UiCounterNumberItem',
+  props: {
+    number: [Number, String],
+    height: {
+      type: [String]
+    },
+    speed: {
+      type: Number,
+      default: 500
+    },
+    direction: {
+      type: String,
+      validator (value) {
+        return ['up', 'down'].indexOf(value) > -1
+      },
+      default: 'up'
+    },
+    isPlus: [Boolean]
+  },
+  data () {
+    return {
+      timer: null,
+      items: [],
+      nowItemIndex: 1,
+      styles: {
+        transform: 0,
+        transitionDuration: 0
+      }
+    }
+  },
+  computed: {
+    cHeight () {
+      return parseFloat(this.height)
+    },
+    cUnit () {
+      return this.height.match('rem') ? 'rem' : 'px'
+    },
+    itemsCount () {
+      return this.items.length
+    },
+    isNumber () {
+      return /[0-9]/.test(`${this.number}`)
+    }
+  },
+  watch: {
+    number (newVal, oldVal) {
+      if (this.isNumber) {
+        this.goValue(newVal, oldVal)
+      } else {
+        this.setTranslate(0, 0)
+      }
+    }
+  },
+  methods: {
+    init (newVal, oldVal) {
+      if (this.direction === 'up') {
+        this.setTranslate(0, -oldVal * this.cHeight)
+      } else {
+        this.setTranslate(0, (-oldVal - 10) * this.cHeight)
+      }
+    },
+    setTranslate (speed, translate, afterDo) {
+      this.styles.transitionDuration = speed + 'ms'
+      this.styles.transform = `translate3d(0, ${translate}${this.cUnit}, 0)`
+      if (afterDo) {
+        let el = this.$refs['transRef']
+        let transitionend = (ev) => {
+          afterDo(ev)
+          el.removeEventListener('transitionend', transitionend)
+        }
+        el.addEventListener('transitionend', transitionend, false)
+      }
+    },
+    goValue (newVal, oldVal = 0) {
+      this.init(newVal, oldVal)
+      setTimeout(() => {
+        if (this.direction === 'up') {
+          if (newVal > oldVal) {
+            this.setTranslate(this.speed, -newVal * this.cHeight, () => {
+              this.setTranslate(0, -newVal * this.cHeight)
+            })
+          } else {
+            this.setTranslate(this.speed, (-newVal - 10) * this.cHeight, () => {
+              this.setTranslate(0, -newVal * this.cHeight)
+            })
+          }
+        } else {
+          if (newVal < oldVal) {
+            this.setTranslate(this.speed, (-newVal - 10) * this.cHeight, () => {
+              this.setTranslate(0, (-newVal - 10) * this.cHeight)
+            })
+          } else {
+            this.setTranslate(this.speed, -newVal * this.cHeight, () => {
+              this.setTranslate(0, (-newVal - 10) * this.cHeight)
+            })
+          }
+        }
+      }, 10)
+    }
+  },
+  mounted () {
+    this.init(this.number, this.number)
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  @import "styleMix";
+  @include ui-counter-number-item;
+</style>
