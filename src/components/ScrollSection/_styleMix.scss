@@ -1,0 +1,51 @@
+@mixin ui-scroll-section {
+  ._ui-scroll-section {
+    @include animation-rotate;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    .loadmore-top {
+      line-height: pxRem(50);
+      height: pxRem(50);
+      margin-top: pxRem(-50);
+      text-align: center;
+      color: #666;
+      .icon-box {
+        display: inline-block;
+        transition: .1s ease;
+        &.rotate-180 {
+          transform: rotate(180deg);
+        }
+      }
+      .loading-icon {
+        animation: animation-rotate 1.2s linear infinite;
+      }
+      .iconfont, .desc {
+        font-size: pxRem(14);
+      }
+    }
+    .loadmore-bottom {
+      color: #666;
+      text-align: center;
+      .loading-box {
+        line-height: pxRem(50);
+        height: pxRem(50);
+        .loading-icon {
+          font-size: pxRem(14);
+          display: inline-block;
+          animation: animation-rotate 1.2s linear infinite;
+        }
+        span {
+          font-size: pxRem(14);
+          position: relative;
+          top: pxRem(-1);
+        }
+      }
+      .loading-finish-box {
+        line-height: pxRem(50);
+        height: pxRem(50);
+        font-size: pxRem(14);
+      }
+    }
+  }
+}
