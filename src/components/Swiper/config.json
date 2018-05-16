@@ -1,0 +1,7 @@
+{
+  "entry": {
+    "swiper": "Swiper.vue",
+    "swiperItem": "SwiperItem.vue"
+  },
+  "units": ["px", "rem"]
+}

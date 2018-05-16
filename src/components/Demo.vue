@@ -1,51 +1,32 @@
 <template>
   <div style="padding-top: 20px">
-    <div>
-      <ui-button @click="hi(0)">default</ui-button>
-      <ui-button type="plain" @click="hi(0.5)">plain</ui-button>
-      <ui-button type="danger" @click="hi(1)">danger</ui-button>
-      <ui-button type="primary" @click="hi(2)">primary</ui-button>
-      <ui-button type="warning" @click="hi(3)">warning</ui-button>
-      <ui-button type="hollow" @click="hi(4)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button disabled @click="hi(5)">default</ui-button>
-      <ui-button type="plain" disabled @click="hi(5.5)">plain</ui-button>
-      <ui-button type="danger" disabled @click="hi(6)">danger</ui-button>
-      <ui-button type="primary" disabled @click="hi(7)">primary</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">warning</ui-button>
-      <ui-button type="hollow" disabled @click="hi(9)">hollow</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button loading icon="icon-loading">default</ui-button>
-    </div>
-    <div style="margin-top: 20px">
-      <ui-button size="large" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="small" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-      <ui-button size="mini" style="display: block; margin-bottom: 20px">default(默认)</ui-button>
-    </div>
+    <ui-swiper :interval="3000" style="height: 180px">
+      <ui-swiper-item  v-for="(banner, index) in banners" :key="index">
+        <img :src="banner" style="max-width: 100%;">
+      </ui-swiper-item>
+    </ui-swiper>
 
-    <div style="margin-top: 20px">
-      <ui-button @click="hi(0)" size="large">large</ui-button>
-      <ui-button type="warning" disabled @click="hi(8)">normal</ui-button>
-      <ui-button type="danger" size="small" @click="hi(1)">small</ui-button>
-      <ui-button type="primary" size="mini" @click="hi(2)">mini</ui-button>
-    </div>
+    <ui-swiper :interval="3000" direction="vertical" style="height: 180px">
+      <ui-swiper-item  v-for="(banner, index) in banners" :key="index">
+        <img :src="banner" style="max-width: 100%;">
+      </ui-swiper-item>
+    </ui-swiper>
   </div>
 </template>
 
 <script>
 // or global lazy load
-import Button from '@/components/Button/Button.vue'
+import Swiper from './Swiper/Swiper.vue'
+import SwiperItem from './Swiper/SwiperItem.vue'
 export default {
-  methods: {
-    hi (num) {
-      console.log('hi', num)
+  data () {
+    return {
+      banners: ['http://img.article.pchome.net/00/51/80/56/pic_lib/s960x639/7s960x639.jpg', 'http://5.595818.com/2014/pic/000/358/d7bd0ddc25574b0205ec56e57db5cf3a.jpg', 'http://5.133998.com/2014/pic/000/362/64cf3cf5e69921c7143fa9e9ab2c727c.jpg']
     }
   },
   components: {
-    'UiButton': Button
+    'UiSwiper': Swiper,
+    'UiSwiperItem': SwiperItem
   }
 }
 </script>

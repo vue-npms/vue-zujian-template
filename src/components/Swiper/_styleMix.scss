@@ -1,0 +1,69 @@
+@mixin ui-swiper {
+  ._ui-swiper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+
+    &.horizontal {
+      .default-swiper-box {
+        align-items: center;
+      }
+      .pagination-wrap {
+        height: pxRem(16);
+        bottom: 0; left: 0; right: 0;
+        .pagination-item {
+          display: inline-block;
+          margin: 0 pxRem(4);
+        }
+      }
+    }
+    &.vertical {
+      .default-swiper-box {
+        flex-direction: column;
+      }
+      .pagination-wrap {
+        flex-direction: column;
+        width: pxRem(30);
+        top: 0; bottom: 0; right: 0;
+        .pagination-item {
+          display: block;
+          margin: pxRem(4) 0;
+        }
+      }
+    }
+
+    .default-swiper-box {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+
+    .pagination-wrap {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      .pagination-item {
+        line-height: pxRem(15);
+        width: pxRem(6);
+        height: pxRem(6);
+        border-radius: pxRem(3);
+        background: #666;
+        &.active {
+          background: #f06;
+        }
+      }
+    }
+  }
+}
+
+@mixin ui-swiper-item {
+  ._ui-swiper-item {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    z-index: 10;
+    /* 遇见过一次图片宽度很宽超过 slide 导致下一个 slide 也会有这个图片 */
+    overflow: hidden;
+  }
+}
