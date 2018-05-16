@@ -1,0 +1,6 @@
+{
+  "entry": {
+    "dropMenu": "DropMenu.vue"
+  },
+  "units": ["px", "rem"]
+}
