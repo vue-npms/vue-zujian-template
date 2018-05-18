@@ -1,7 +1,7 @@
 <template>
   <div class="_ui-search">
     <div class="search-input-wrap" :class="{'exist-cancel-text': currentValue}">
-      <form action="#" class="search-input-form" @submit.prevent="submit">
+      <form action="" class="search-input-form" @submit.prevent="$emit('submit')">
         <i class="iconfont icon-search"></i>
         <ui-input class="input" type="search" :placeholder="placeholder" v-model="currentValue" :readonly="fullPage" show-clear @click.native="open"></ui-input>
       </form>
@@ -10,7 +10,7 @@
 
     <div v-if="fullPage" v-show="showFullPage" class="ui-search ui-search-fly">
       <div class="search-input-wrap exist-cancel-text">
-        <form action="#" class="search-input-form" @submit.prevent="submit">
+        <form action="" class="search-input-form" @submit.prevent="$emit('submit')">
           <i class="iconfont icon-search"></i>
           <ui-input class="input" type="search" :placeholder="placeholder" v-model="currentValue" show-clear ref="searchRef"></ui-input>
         </form>
