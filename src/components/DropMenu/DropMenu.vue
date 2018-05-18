@@ -48,7 +48,7 @@ export default {
   methods: {
     updateOption (option) {
       if (!option.disabled && this.currentValue !== option) {
-        this.$emit('update', this.currentValue, option)
+        this.$emit('update', option, this.currentValue)
         this.currentValue = option
         this.showMenu = false
       }

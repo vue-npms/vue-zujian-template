@@ -24,8 +24,8 @@ export default {
     }
   },
   methods: {
-    updateSelect (ov, nv) {
-      console.log(ov, nv)
+    updateSelect (nv, ov) {
+      console.log(nv, ov)
     }
   },
   components: {
