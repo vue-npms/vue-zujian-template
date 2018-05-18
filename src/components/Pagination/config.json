@@ -1,0 +1,6 @@
+{
+  "entry": {
+    "pagination": "Pagination.vue"
+  },
+  "units": ["px", "rem"]
+}
