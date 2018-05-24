@@ -9,9 +9,12 @@
     <h3>:fix-count="10" fix-str="-" :speed="1000" :delay-each="100"</h3>
     <ui-counter-number :number="number2" :fix-count="10" fix-str="-" :speed="1000" :delay-each="100"></ui-counter-number>
     <h3>height="50px" & custom view</h3>
-    <ui-counter-number :number="number1" height="50px">
+    <ui-counter-number :number="number1" height="50px" style="color: #f00;">
       <template slot-scope="{number}">
-        <span style="display: inline-block; background: #999; width: 50px; height: 50px; line-height: 50px; color: #f00; font-size: 30px">{{number}}</span>
+        <span style="display: inline-block; background: #999; width: 50px; line-height: 50px; font-size: 30px">{{number}}</span>
+      </template>
+      <template slot="after" slot-scope="{number, originNumber, position}">
+        <span>{{position}}-{{number}}-{{originNumber}}</span>
       </template>
     </ui-counter-number>
   </div>

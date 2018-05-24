@@ -1,8 +1,11 @@
 <template>
   <div class="_ui-counter-number" :style="{height: height}">
-    <ui-counter-number-item v-for="(num,index) in calcNumbers" :key="calcNumbersCount-index" :number="num" :height="height" :speed="speed + delayEach * index" :direction="direction" :is-plus="isPlus">
+    <ui-counter-number-item v-for="(num,index) in calcNumbers" :key="calcNumbersCount-index" :number="num" :position="calcNumbersCount-index" :origin-number="number" :height="height" :speed="speed + delayEach * index" :direction="direction" :is-plus="isPlus">
       <template slot-scope="{number}">
         <slot :number="number">{{number}}</slot>
+      </template>
+      <template slot="after" slot-scope="{number, position, originNumber}">
+        <slot name="after" :number="number" :position="position" :origin-number="originNumber"></slot>
       </template>
     </ui-counter-number-item>
   </div>
